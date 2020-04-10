@@ -16,7 +16,7 @@ div {
     }
 }
 
-%message {
+%table,th,td {
     font-family: sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -25,8 +25,8 @@ div {
     margin: 20px;
 }
 
-.success {
-    @extend %message;
+.td {
+    @extend %table;
     background-color: white;
 }
 
