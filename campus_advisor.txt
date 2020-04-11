@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-Hello Campus Advisors!
-=======
-Hello Campus Advisors!
->>>>>>> b3bad97d4deb91baaa4872fc7136ea88d01cdc0e
