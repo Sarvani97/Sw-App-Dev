@@ -1,0 +1,32 @@
+$bcolor :white;
+$font : 15px;
+
+body {
+    background-color: $bcolor;
+    font-size: $font;
+}
+
+div {
+    font-size: 15px;
+    ul {
+        color: black;
+    }
+    ol {
+        color: black;
+    }
+}
+
+%table,th,td {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 20px;
+    margin: 20px;
+}
+
+.td {
+    @extend %table;
+    background-color: white;
+}
+
