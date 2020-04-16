@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <link rel = "stylesheet" href = "{{ url_for('static', filename='style.css')}}"
+        >
+    </head>
+    <body>
+        <form action = "{{ url_for('response') }}"
+         method="POST">
+            <div class = "container">
+                <h1>Register</h1>
+                <hr>
+                <h5>{{headline}}</h5>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter email" name="email" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter password" name="psw" required>
+                <p>Select your gender</p>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+                <br>
+                <p>Please select your age:</p>
+                <input type="radio" id="a1" name="age" value="30">
+                <label for="a1">0 - 30</label><br>
+                <input type="radio" id="a2" name="age" value="60">
+                <label for="a2">31 - 60</label><br>
+                <input type="radio" id="a3" name="age" value="100">
+                <label for="a3">61 - 100</label><br><br>
+                <textarea rows="4" cols="50" name="address">Enter the address</textarea>
+                <button type="submit" class="registerbtn">Register</button>
+                <hr>  
+            </div>
+            <div class="container signin"></div>
+        </form>
+    </body>
+</html>
