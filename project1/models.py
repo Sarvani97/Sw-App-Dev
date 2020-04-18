@@ -27,3 +27,10 @@ class USER(db.Model):
     # def __repr__(self):
     #     return '<Registers %r>' %(self.email)
 
+class Book(db.Model):
+    __tablename__ = "book"
+    isbn = Column(String(25), primary_key=True)
+    bname = Column(String(50))
+    author = Column(String(50))
+    year = Column(Integer)
+
