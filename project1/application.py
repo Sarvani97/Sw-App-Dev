@@ -38,3 +38,4 @@ def response():
     elif request.method == "GET":
         return render_template("register.html",headline="")
 
+
