@@ -34,7 +34,8 @@
                 <input type="radio" id="a3" name="age" value="100">
                 <label for="a3">61 - 100</label><br><br> -->
                 <textarea rows="4" cols="50" name="address">Enter the address</textarea>
-                <button type="submit" class="registerbtn">Register</button>
+                <button type="submit" class="btn btn-dark mr-3" formaction="{{ url_for('index') }}">Register</button>
+                <button type="submit" class="btn btn-dark" formaction="{{ url_for('authentication') }}">Login</button>
                 <hr>  
             </div>
             <div class="container signin"></div>
