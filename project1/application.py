@@ -4,7 +4,7 @@ import logging
 import calendar
 import time
 
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
 from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -70,8 +70,6 @@ def response():
     elif request.method == "GET":
         return render_template("register.html",headline="")
 
-<<<<<<< HEAD
-=======
 @app.route("/admin")
 def database():
     users = USER.query.order_by(USER.timestamp).all()
@@ -89,10 +87,33 @@ def database():
         ad.append(i.address)
         stamps.append(time.ctime(i.timestamp))
     return render_template("userlist.html", emails=emails,pwd=pwd,gen=gen,ag=ag,ad=ad,stamps=stamps,length=len(emails))
+
+@app.route("/auth", methods=["POST"])
+def authentication():
+    name = request.form.get("email")
+    psd = request.form.get("password")
+    gen = request.form.get("gender")
+    ag = request.form.get("age")
+    add = request.form.get("address")
+    check = USER.query.filter_by(email=name).first()
+    if check is None:
+        return render_template("register.html",headline="Not registered. Please register")
     
+    if name == check.email and psd == check.password:
+        if session.get("name") is None:
+            session["name"] = name
+        return render_template("home.html", headline=name)
+    else:
+        return render_template("register.html", headline="credentials are incorrect")
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    n = session.get("name")
+    session.clear()
+    return redirect(url_for('response'))
 
 
 
 
->>>>>>> 68f048244d387577fc9302c769f5db1cdc03974b
 
