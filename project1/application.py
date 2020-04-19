@@ -4,7 +4,7 @@ import logging
 import calendar
 import time
 
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
 from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -39,18 +39,19 @@ def init_db():
     db.metadata.create_all(bind=engine)
 init_db()
 
-@app.route("/",methods=["GET", "POST"])
-def index():
-    return "hello!"
-
-# @app.route("/")
+# @app.route("/",methods=["GET", "POST"])
 # def index():
-#     return "Project 1: TODO"
+#     return "hello!"
+
+
 
 @app.route("/register", methods=["GET","POST"])
-def response():
+@app.route("register/<int:parameter>",methods=["GET","POST"])
+def response(parameter=None):
     if request.method == "POST":
         id = request.form.get("email")
+        if "." not in id:
+            return render_template("register.html",headline="Enter a valid email address")
         #print(id, file=sys.stdout)
         pwd = request.form.get("password")
         g = request.form.get("gender")
@@ -68,7 +69,12 @@ def response():
             id += "Registered. Please login."
         return render_template("register.html",headline=id)
     elif request.method == "GET":
-        return render_template("register.html",headline="")
+        s = ""
+        if parameter == 1:
+            s = "You entered wrong credentials"
+        elif parameter == 2:
+            s = "Not registered. Please register"
+        return render_template("register.html",headline=s)
 
 @app.route("/admin")
 def database():
@@ -87,7 +93,38 @@ def database():
         ad.append(i.address)
         stamps.append(time.ctime(i.timestamp))
     return render_template("userlist.html", emails=emails,pwd=pwd,gen=gen,ag=ag,ad=ad,stamps=stamps,length=len(emails))
+
+@app.route("/auth", methods=["POST"])
+def authentication():
+    name = request.form.get("email")
+    psd = request.form.get("password")
+    gen = request.form.get("gender")
+    ag = request.form.get("age")
+    add = request.form.get("address")
+    check = USER.query.filter_by(email=name).first()
+    if check is None:
+        return redirect(url_for('response',parameter=2))
     
+    if name == check.email and psd == check.password:
+        if session.get(name) is None:
+            session[name] = psd
+        return redirect(url_for('foo',param=name))
+    else:
+        return redirect(url_for('response',parameter=1))
+
+@app.route("/home/<param>", methods=["GET","POST"])
+def foo(param):
+    if request.method == "GET":
+        if session.get(param) is not None:
+            return render_template("home.html",headline=param)
+        else:
+            return "<h3>Login to contintue</h3>"
+
+
+@app.route("/logout/<param>", methods=["POST"])
+def logout(param):
+    session[param] = None
+    return redirect(url_for('response'))
 
 
 
