@@ -2,8 +2,9 @@ import os
 import csv
 import sys
 
+
 from flask import Flask
-from models import Book
+from models import *
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ def main():
 
         for isbn, bname, author, year in read:
             binfo = Book(isbn=isbn, bname=bname, author=author, year=year)
+            print(isbn,bname,author,year)
             db.session.add(binfo)
             db.session.commit()
         print("Successfully added", file=sys.stdout)
