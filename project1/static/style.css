@@ -1,57 +1,40 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black;
+*{
+    margin: 0;
+    padding: 0;
 }
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
 
-* {
-    box-sizing: border-box;
 }
-
-.container {
-    padding: 16px;
-    background-color: white;
+.rate:not(:checked) > input {
+    position: absolute;
+    top:-9999px;
 }
-
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
 }
-
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
+.rate:not(:checked) > label:before {
+    content: '★ ';
 }
-
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+.rate > input:checked ~ label {
+    color:blue;    
 }
-
-.registerbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: blue;  
 }
-
-.registerbtn:hover {
-    opacity: 1;
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: blue;
 }
-
-a {
-    color: dodgerblue;
-}
-
-.signin {
-    background-color: #f1f1f1;
-    text-align: center;
-}
-
