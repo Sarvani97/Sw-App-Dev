@@ -28,8 +28,8 @@ def initial():
 def index(parameter=None):
     if request.method == "POST":
         var1 = request.form.get("email")
-        if "." not in var1:
-            return render_template("registration_form.html", headline="Please enter valid email address")
+        # if "." not in var1:
+        #     return render_template("registration_form.html", headline="Please enter valid email address")
         var2 = request.form.get("pwd")
         check = User.query.filter_by(name=var1).first()
         if check is not None:
