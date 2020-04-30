@@ -37,10 +37,9 @@ def index(parameter=None):
         user = User(name=var1, password=var2, timestamp=calendar.timegm(time.gmtime()))
         db.session.add(user)
         db.session.commit()
-        if len(var1) == 0:
-            var1 += "Enter details"
-        else:
-            var1 += " successfully registered. Please Login."
+        # if len(var1) == 0:
+        #     var1 += "Enter details"
+        var1 += " successfully registered. Please Login."
         return render_template("registration_form.html", headline=var1)
     else:
         variable = ""

@@ -3,7 +3,7 @@
     <head>
         <title>My Webpage</title>
         <script>
-            funtion rules() {
+            function rules() {
                 let id = document.querySelector('#email').value;
                 let psd = document.querySelector('#pwd').value;
                 var eR = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -46,8 +46,8 @@
                 <label for="pwd">Password:</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
                 </div>
-                <button type="submit" class="btn btn-dark mr-3" formaction="{{ url_for('index') }}">Register</button>
-                <button type="submit" class="btn btn-dark" formaction="{{ url_for('authentication') }}">Login</button>
+                <button type="submit" onclick = "rules()"  class="btn btn-dark mr-3" formaction="{{ url_for('index') }}">Register</button>
+                <button type="submit" onclick = "rules()" class="btn btn-dark" formaction="{{ url_for('authentication') }}">Login</button>
             </form>
         </div>
     </body>
