@@ -28,8 +28,8 @@ def initial():
 def index(parameter=None):
     if request.method == "POST":
         var1 = request.form.get("email")
-        if "." not in var1:
-            return render_template("registration_form.html", headline="Please enter valid email address")
+        # if "." not in var1:
+        #     return render_template("registration_form.html", headline="Please enter valid email address")
         var2 = request.form.get("pwd")
         check = User.query.filter_by(name=var1).first()
         if check is not None:
@@ -37,10 +37,9 @@ def index(parameter=None):
         user = User(name=var1, password=var2, timestamp=calendar.timegm(time.gmtime()))
         db.session.add(user)
         db.session.commit()
-        if len(var1) == 0:
-            var1 += "Enter details"
-        else:
-            var1 += " successfully registered. Please Login."
+        # if len(var1) == 0:
+        #     var1 += "Enter details"
+        var1 += " successfully registered. Please Login."
         return render_template("registration_form.html", headline=var1)
     else:
         variable = ""

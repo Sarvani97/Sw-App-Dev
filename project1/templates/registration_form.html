@@ -2,6 +2,32 @@
 <html>
     <head>
         <title>My Webpage</title>
+        <script>
+            function rules() {
+                let id = document.querySelector('#email').value;
+                let psd = document.querySelector('#pwd').value;
+                var eR = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                var pR = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,20}$/;
+                if(id.length === 0 || psd.length === 0) {
+                    document.querySelector('h6').innerHTML = 'Please fill all the fields';
+                    event.preventDefault();
+                    return false;
+                }
+                else if(id.match(eR) === null) {
+                    document.querySelector('h6').innerHTML = 'Enter a valid email address';
+                    event.preventDefault();
+                    return false;
+                }
+                else if(psd.match(pR) === null) {
+                    document.querySelector('h6').innerHTML = 'Password must contain a minimum of 6 characters including a lowercase,uppercase and special characters';
+                    event.preventDefault();
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        </script>
         <link rel="stylesheet" href="{{ url_for('static', filename='reference.css')}}">
         <!-- <link rel = "stylesheet" href="reference.css"> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -20,8 +46,8 @@
                 <label for="pwd">Password:</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
                 </div>
-                <button type="submit" class="btn btn-dark mr-3" formaction="{{ url_for('index') }}">Register</button>
-                <button type="submit" class="btn btn-dark" formaction="{{ url_for('authentication') }}">Login</button>
+                <button type="submit" onclick = "rules()"  class="btn btn-dark mr-3" formaction="{{ url_for('index') }}">Register</button>
+                <button type="submit" onclick = "rules()" class="btn btn-dark" formaction="{{ url_for('authentication') }}">Login</button>
             </form>
         </div>
     </body>
